@@ -76,6 +76,25 @@
 		fi \
 	}; f"
 
+
+	# Stashing
+	stash = stash save "latest working state"
+	unstash = stash apply
+
+	# Staging
+	stage = add
+	unstage = reset
+
+	uncommit = reset --soft HEAD^
+	# Undo a `git push`
+	undopush = push -f origin HEAD^:master
+
+	# Stage non whitespace changes
+	addnw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
+
+	# Word Diff
+	wd = diff --patch-with-stat --word-diff
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
